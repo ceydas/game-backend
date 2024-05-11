@@ -18,9 +18,9 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: 'mysql-db'
-      MYSQL_USER: 'user'
-      MYSQL_PASSWORD: 'password'
-      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_USER: 'ceydog'
+      MYSQL_PASSWORD: 'ceydog_pw'
+      MYSQL_ROOT_PASSWORD: 'ceydog_pw'
     networks:
       - 'local-network'
     ports:
