@@ -30,9 +30,19 @@ public class User {
         return userId;
     }
 
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+
     public EnumCountry getCountry() {
         return country;
     }
+
+    public void setCountry(EnumCountry country) {
+        this.country = country;
+    }
+
 
     public Long getCurrentCoins() {
         return currentCoins;
@@ -49,9 +59,7 @@ public class User {
     public void setCurrentLevel(int currentLevel) {
         this.currentLevel = currentLevel;
     }
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
+
 
 
 }
