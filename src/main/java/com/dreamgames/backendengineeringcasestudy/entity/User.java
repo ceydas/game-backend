@@ -2,6 +2,7 @@ package com.dreamgames.backendengineeringcasestudy.entity;
 
 import com.dreamgames.backendengineeringcasestudy.enums.EnumCountry;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,7 +31,7 @@ public class User {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    protected void setUserId(Long userId) {
         this.userId = userId;
     }
 

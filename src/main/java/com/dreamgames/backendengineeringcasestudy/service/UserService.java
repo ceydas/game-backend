@@ -24,9 +24,8 @@ public class UserService {
         return userDtoList;
     }
 
-    public UserDto create(){
-        //TODO: Who's responsible for creating an instance of 'user'? -> Probably userentityservice?
-        User user = userEntityService.create();
+    public UserDto createAndSave(){
+        User user = userEntityService.createAndSaveUser();
         UserDto userDto = UserDtoConverter.INSTANCE.convertToUserDto(user);
         return userDto;
     }
@@ -47,21 +46,18 @@ public class UserService {
     }
 
 
+    public UserDto updateLevel(UserUpdateLevelRequestDto updateLevelRequestDto){
+        Long userId = updateLevelRequestDto.getUserId();
+        int newLevel = updateLevelRequestDto.getNewLevel();
+        Long newCoins = updateLevelRequestDto.getNewCoins();
 
-    public UserDto updateLevel(UserUpdateLevelRequestDto userUpdateLevelRequestDto) {
+        User user = userEntityService.findByIdWithControl(userId);
+        user.setCurrentLevel(newLevel);
+        user.setCurrentCoins(newCoins);
 
-        Long userId = userUpdateLevelRequestDto.getUserId();
+        userEntityService.save(user);
 
-        boolean doesExist = userEntityService.existsById(userId);
-        if (!doesExist){
-            throw new UserException(UserErrorMessage.USER_NOT_FOUND);
-        }
-
-        //TODO: add the mapping, level update request dto does not include the country field.
-        //User user = UserDtoConverter.INSTANCE.convertToUser(userUpdateLevelRequestDto);
-        //user = userEntityService.save(user);
-
-        //UserDto userDto = UserDtoConverter.INSTANCE.convertToUserDto(user);
+        UserDto userDto = UserDtoConverter.INSTANCE.convertToUserDto(user);
 
         return userDto;
     }

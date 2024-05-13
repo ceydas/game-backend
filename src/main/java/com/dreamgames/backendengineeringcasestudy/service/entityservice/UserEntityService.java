@@ -1,6 +1,7 @@
 package com.dreamgames.backendengineeringcasestudy.service.entityservice;
 
 import com.dreamgames.backendengineeringcasestudy.dto.UserDto;
+import com.dreamgames.backendengineeringcasestudy.dto.UserUpdateLevelRequestDto;
 import com.dreamgames.backendengineeringcasestudy.entity.User;
 import com.dreamgames.backendengineeringcasestudy.enums.EnumCountry;
 import com.dreamgames.backendengineeringcasestudy.enums.EnumLevel;
@@ -23,7 +24,11 @@ import java.util.Optional;
 public class UserEntityService {
     private final UserRepository userRepository;
     public List<User> findAll(){
-        return userRepository.findAll();
+        List<User> userList = userRepository.findAll();
+        if (userList.isEmpty()){
+            throw new UserException(UserErrorMessage.NO_USERS);
+        }
+        return userList;
     }
 
     public boolean existsById(Long id){
@@ -37,20 +42,23 @@ public class UserEntityService {
         return userRepository.save(user);
     }
 
-    public User create(){
+    public static User create(){
         User user = new User();
+
         user.setCurrentLevel(EnumLevel.START.getLevel());
         user.setCurrentCoins(EnumReward.REGISTER.getReward());
         user.setCountry(CountryPickerUtil.getRandomCountry());
-        //TODO: See the implementation of 'save' :
-        //  if (this.entityInformation.isNew(entity)) {
-        //            this.em.persist(entity);
-        //            return entity;
-        //        } else {
-        //            return this.em.merge(entity);
-        //        }
-        return userRepository.save(user);
+
+        return user;
     }
+
+    public User createAndSaveUser(){
+        User user = create();
+        return userRepository.save(user);
+
+    }
+
+
 
     public User findByIdWithControl(Long id){
 
