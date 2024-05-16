@@ -2,25 +2,30 @@ package com.dreamgames.backendengineeringcasestudy.tournament_session.entity;
 
 import com.dreamgames.backendengineeringcasestudy.tournament.entity.Tournament;
 import com.dreamgames.backendengineeringcasestudy.user.entity.User;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.boot.context.properties.bind.DefaultValue;
+
+import java.sql.Timestamp;
 
 @Entity
+@Getter
+@Setter
 public class TournamentSession {
 
 
     @Id
-    private Long tournamentId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long tournamentSessionId;
 
-    private Tournament tournament;
+    private Long userId;
 
-    private User user;
+    private Long latestTournamentId;
 
-    public void setId(Long id) {
-        this.tournamentId = id;
-    }
+    private int levelsAdvanced;
 
-    public Long getId() {
-        return tournamentId;
-    }
+    private Timestamp joinedAt;
+
+    private boolean didClaimReward;
 }

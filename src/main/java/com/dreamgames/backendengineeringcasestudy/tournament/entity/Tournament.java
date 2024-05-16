@@ -1,11 +1,22 @@
 package com.dreamgames.backendengineeringcasestudy.tournament.entity;
 
+import com.dreamgames.backendengineeringcasestudy.tournament_session.entity.TournamentSession;
+import com.dreamgames.backendengineeringcasestudy.tournament_session.enums.EnumTournamentReward;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
+@Getter
+@Setter
 public class Tournament {
 
     @Id
@@ -16,37 +27,5 @@ public class Tournament {
 
     private boolean active;
 
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
 
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalDateTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
 }

@@ -9,7 +9,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-15T02:59:08+0300",
+    date = "2024-05-17T00:55:32+0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 19.0.1 (Oracle Corporation)"
 )
 public class UserDtoConverterImpl implements UserDtoConverter {
@@ -22,6 +22,7 @@ public class UserDtoConverterImpl implements UserDtoConverter {
 
         User user = new User();
 
+        user.setUserId( userDto.getUserId() );
         if ( userDto.getCountry() != null ) {
             user.setCountry( Enum.valueOf( EnumCountry.class, userDto.getCountry() ) );
         }
@@ -37,16 +38,16 @@ public class UserDtoConverterImpl implements UserDtoConverter {
             return null;
         }
 
-        UserDto userDto = new UserDto();
+        UserDto.UserDtoBuilder userDto = UserDto.builder();
 
-        userDto.setUserId( user.getUserId() );
+        userDto.userId( user.getUserId() );
         if ( user.getCountry() != null ) {
-            userDto.setCountry( user.getCountry().name() );
+            userDto.country( user.getCountry().name() );
         }
-        userDto.setCurrentCoins( user.getCurrentCoins() );
-        userDto.setCurrentLevel( user.getCurrentLevel() );
+        userDto.currentCoins( user.getCurrentCoins() );
+        userDto.currentLevel( user.getCurrentLevel() );
 
-        return userDto;
+        return userDto.build();
     }
 
     @Override
