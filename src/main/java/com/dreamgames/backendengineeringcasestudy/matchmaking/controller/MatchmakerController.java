@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class MatchmakerController {
 
-    UserService userService;
-    TournamentService tournamentService;
+    private final UserService userService;
+    private final TournamentService tournamentService;
     @PostMapping("/tournament/enter")
     public ResponseEntity enterTournament(@RequestParam(name = "user") Long userId){
         UserDto userDto = userService.getUserDetails(userId);

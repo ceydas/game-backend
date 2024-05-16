@@ -9,6 +9,7 @@ com/dreamgames/backendengineeringcasestudy/user/service/UserService.class
 com/dreamgames/backendengineeringcasestudy/matchmaking/exception/MatchmakerException.class
 com/dreamgames/backendengineeringcasestudy/tournament/service/entityservice/TournamentEntityService.class
 com/dreamgames/backendengineeringcasestudy/tournament/controller/TournamentController.class
+com/dreamgames/backendengineeringcasestudy/user/dto/UserUpdateResponseDto$UserUpdateResponseDtoBuilder.class
 com/dreamgames/backendengineeringcasestudy/matchmaking/enums/EnumMatchCoins.class
 com/dreamgames/backendengineeringcasestudy/tournament/service/TournamentService.class
 com/dreamgames/backendengineeringcasestudy/user/service/entityservice/UserEntityService.class
@@ -21,6 +22,7 @@ com/dreamgames/backendengineeringcasestudy/matchmaking/entity/MatchGroup.class
 com/dreamgames/backendengineeringcasestudy/user/dto/UserUpdateLevelRequestDto.class
 com/dreamgames/backendengineeringcasestudy/user/converter/UserDtoConverter.class
 com/dreamgames/backendengineeringcasestudy/user/exception/UserException.class
+com/dreamgames/backendengineeringcasestudy/user/dto/UserUpdateResponseDto.class
 com/dreamgames/backendengineeringcasestudy/tournament/converter/TournamentConverter.class
 com/dreamgames/backendengineeringcasestudy/user/dto/UserLevelCoinDto.class
 com/dreamgames/backendengineeringcasestudy/user/exception/UserErrorMessage.class

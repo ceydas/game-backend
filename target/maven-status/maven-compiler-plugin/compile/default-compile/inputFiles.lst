@@ -18,6 +18,7 @@
 /Users/ceydog/Desktop/github_repos/dream-backend-case-study/src/main/java/com/dreamgames/backendengineeringcasestudy/user/controller/UserController.java
 /Users/ceydog/Desktop/github_repos/dream-backend-case-study/src/main/java/com/dreamgames/backendengineeringcasestudy/user/util/CountryPickerUtil.java
 /Users/ceydog/Desktop/github_repos/dream-backend-case-study/src/main/java/com/dreamgames/backendengineeringcasestudy/user/dto/UserDto.java
+/Users/ceydog/Desktop/github_repos/dream-backend-case-study/src/main/java/com/dreamgames/backendengineeringcasestudy/user/dto/UserUpdateResponseDto.java
 /Users/ceydog/Desktop/github_repos/dream-backend-case-study/src/main/java/com/dreamgames/backendengineeringcasestudy/matchmaking/enums/EnumMatchLevel.java
 /Users/ceydog/Desktop/github_repos/dream-backend-case-study/src/main/java/com/dreamgames/backendengineeringcasestudy/matchmaking/composite/MatchId.java
 /Users/ceydog/Desktop/github_repos/dream-backend-case-study/src/main/java/com/dreamgames/backendengineeringcasestudy/tournament/entity/Tournament.java
