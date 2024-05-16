@@ -1,7 +1,10 @@
 package com.dreamgames.backendengineeringcasestudy.user.entity;
 
+import com.dreamgames.backendengineeringcasestudy.matchmaking.entity.Match;
 import com.dreamgames.backendengineeringcasestudy.user.enums.EnumCountry;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "USER")
@@ -21,6 +24,9 @@ public class User {
 
     @Column(name="USER_LEVEL", nullable=false, unique=false)
     private int currentLevel;
+
+    @OneToMany(mappedBy = "user")
+    private List<Match> matchList;
 
     public Long getUserId() {
         return userId;
