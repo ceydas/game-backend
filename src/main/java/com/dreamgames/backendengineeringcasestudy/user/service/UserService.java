@@ -3,8 +3,10 @@ package com.dreamgames.backendengineeringcasestudy.user.service;
 import com.dreamgames.backendengineeringcasestudy.user.converter.UserDtoConverter;
 import com.dreamgames.backendengineeringcasestudy.user.dto.UserDto;
 import com.dreamgames.backendengineeringcasestudy.user.dto.UserUpdateLevelRequestDto;
+import com.dreamgames.backendengineeringcasestudy.user.dto.UserUpdateResponseDto;
 import com.dreamgames.backendengineeringcasestudy.user.entity.User;
 import com.dreamgames.backendengineeringcasestudy.user.enums.EnumLevel;
+import com.dreamgames.backendengineeringcasestudy.user.enums.EnumReward;
 import com.dreamgames.backendengineeringcasestudy.user.exception.UserErrorMessage;
 import com.dreamgames.backendengineeringcasestudy.user.exception.UserException;
 import com.dreamgames.backendengineeringcasestudy.user.service.entityservice.UserEntityService;
@@ -84,22 +86,27 @@ public class UserService {
         return userDto;
     }
 
-    public UserDto levelUp(Long id, int levels){
+    public UserUpdateResponseDto completeLevel(Long id){
         User user = userEntityService.findByIdWithControl(id);
-        int currentLevel = user.getCurrentLevel();
-        user.setCurrentLevel(currentLevel + levels);
-        userEntityService.save(user);
-        UserDto userDto = UserDtoConverter.INSTANCE.convertToUserDto(user);
-        return userDto;
-    }
 
-    public UserDto levelUp(Long id){
-        User user = userEntityService.findByIdWithControl(id);
         int currentLevel = user.getCurrentLevel();
-        user.setCurrentLevel(currentLevel + EnumLevel.DEFAULT_LEVEL_UP.getLevel());
+        Long currentCoins = user.getCurrentCoins();
+
+        int newLevel = currentLevel + EnumLevel.DEFAULT_LEVEL_UP.getLevel();
+        Long newCoins = currentCoins + EnumReward.COMPLETE_LEVEL.getReward();
+
+        user.setCurrentLevel(newLevel);
+        user.setCurrentCoins(newCoins);
         userEntityService.save(user);
-        UserDto userDto = UserDtoConverter.INSTANCE.convertToUserDto(user);
-        return userDto;
+
+        UserUpdateResponseDto updateResponseDto = UserUpdateResponseDto.builder()
+                .id(id)
+                .oldLevel(currentLevel)
+                .oldCoins(currentCoins)
+                .newCoins(newCoins)
+                .newLevel(newLevel).build();
+
+        return updateResponseDto;
     }
     public UserDto getUserDetails(Long id){
         User user = userEntityService.findByIdWithControl(id);

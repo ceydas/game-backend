@@ -8,7 +8,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-15T02:59:08+0300",
+    date = "2024-05-16T23:10:21+0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 19.0.1 (Oracle Corporation)"
 )
 public class TournamentConverterImpl implements TournamentConverter {
@@ -49,8 +49,8 @@ public class TournamentConverterImpl implements TournamentConverter {
         if ( tournamentDto.getEndTime() != null ) {
             tournament.setEndTime( LocalDateTime.parse( tournamentDto.getEndTime(), dateTimeFormatter_yyyy_MM_dd_HH_mm_ss_11333195168 ) );
         }
-        tournament.setActive( tournamentDto.isActive() );
         tournament.setId( tournamentDto.getId() );
+        tournament.setActive( tournamentDto.isActive() );
 
         return tournament;
     }

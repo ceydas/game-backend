@@ -1,5 +1,6 @@
 package com.dreamgames.backendengineeringcasestudy.user.service.entityservice;
 
+import com.dreamgames.backendengineeringcasestudy.matchmaking.enums.EnumMatchCoins;
 import com.dreamgames.backendengineeringcasestudy.user.entity.User;
 import com.dreamgames.backendengineeringcasestudy.user.enums.EnumCountry;
 import com.dreamgames.backendengineeringcasestudy.user.enums.EnumLevel;

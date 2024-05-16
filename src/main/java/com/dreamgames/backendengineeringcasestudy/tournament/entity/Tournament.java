@@ -1,52 +1,33 @@
 package com.dreamgames.backendengineeringcasestudy.tournament.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.dreamgames.backendengineeringcasestudy.matchmaking.entity.Match;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 
 @Entity
+@Getter
+@Setter
+@Table(name = "TOURNAMENT")
 public class Tournament {
 
     @Id
     private Long id;
 
+    @Column(name = "TOURNAMENT_START_TIME")
     private LocalDateTime startTime;
+
+    @Column(name = "TOURNAMENT_END_TIME")
     private LocalDateTime endTime;
 
     private boolean active;
 
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalDateTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
+    @OneToMany(mappedBy = "tournament")
+    private Set<Match> matchList;
 
 
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
 }

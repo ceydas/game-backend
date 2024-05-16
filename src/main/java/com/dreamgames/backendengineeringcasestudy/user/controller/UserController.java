@@ -2,6 +2,7 @@ package com.dreamgames.backendengineeringcasestudy.user.controller;
 
 import com.dreamgames.backendengineeringcasestudy.user.dto.UserDto;
 import com.dreamgames.backendengineeringcasestudy.user.dto.UserUpdateLevelRequestDto;
+import com.dreamgames.backendengineeringcasestudy.user.dto.UserUpdateResponseDto;
 import com.dreamgames.backendengineeringcasestudy.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +38,12 @@ public class UserController {
     public ResponseEntity<UserDto> updateUserLevelAndCoins(@RequestBody UserUpdateLevelRequestDto updateLevelRequestDto){
         UserDto userDto = userService.updateLevel(updateLevelRequestDto);
         return ResponseEntity.ok(userDto);
+    }
+
+    @PutMapping("/user-progress/users/{id}/complete-level")
+    public ResponseEntity<UserUpdateResponseDto> completeLevel(@PathVariable Long id){
+        UserUpdateResponseDto updateResponseDto = userService.completeLevel(id);
+        return ResponseEntity.ok(updateResponseDto);
     }
 
 }
