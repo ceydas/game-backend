@@ -19,13 +19,19 @@ public class TournamentSession {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tournamentSessionId;
 
-    private Long userId;
+    @OneToOne
+    @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID", nullable = false, unique = true)
+    private User user;
 
-    private Long latestTournamentId;
+    @ManyToOne
+    @JoinColumn(name = "TOURNAMENT_ID", referencedColumnName = "id", nullable = false)
+    private Tournament tournament;
 
-    private int levelsAdvanced;
+    @Column(columnDefinition = "INT DEFAULT 0", nullable = false)
+    private Long reward;
 
     private Timestamp joinedAt;
 
+    @Column(columnDefinition = "BOOLEAN DEFAULT FALSE", nullable = false)
     private boolean didClaimReward;
 }

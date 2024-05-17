@@ -1,24 +1,4 @@
 USE `mysql-db`;
-insert into user (user_level, user_coins, user_id, user_country) values (26, 39, 1, 'UNITED_KINGDOM');
-insert into user (user_level, user_coins, user_id, user_country) values (14, 3482, 2, 'UNITED_STATES');
-insert into user (user_level, user_coins, user_id, user_country) values (14, 7719, 3, 'UNITED_STATES');
-insert into user (user_level, user_coins, user_id, user_country) values (21, 8706, 4, 'GERMANY');
-insert into user (user_level, user_coins, user_id, user_country) values (30, 2150, 5, 'UNITED_STATES');
-insert into user (user_level, user_coins, user_id, user_country) values (2, 4022, 6, 'FRANCE');
-insert into user (user_level, user_coins, user_id, user_country) values (5, 3614, 7, 'UNITED_STATES');
-insert into user (user_level, user_coins, user_id, user_country) values (18, 7714, 8, 'TURKEY');
-insert into user (user_level, user_coins, user_id, user_country) values (17, 1644, 9, 'UNITED_STATES');
-insert into user (user_level, user_coins, user_id, user_country) values (25, 2736, 10, 'FRANCE');
-insert into user (user_level, user_coins, user_id, user_country) values (11, 8923, 11, 'FRANCE');
-insert into user (user_level, user_coins, user_id, user_country) values (18, 939, 12, 'FRANCE');
-insert into user (user_level, user_coins, user_id, user_country) values (35, 269, 13, 'UNITED_STATES');
-insert into user (user_level, user_coins, user_id, user_country) values (35, 1860, 14, 'TURKEY');
-insert into user (user_level, user_coins, user_id, user_country) values (15, 763, 15, 'FRANCE');
-insert into user (user_level, user_coins, user_id, user_country) values (31, 2226, 16, 'FRANCE');
-insert into user (user_level, user_coins, user_id, user_country) values (7, 921, 17, 'FRANCE');
-insert into user (user_level, user_coins, user_id, user_country) values (21, 8729, 18, 'UNITED_STATES');
-insert into user (user_level, user_coins, user_id, user_country) values (13, 3277, 19, 'FRANCE');
-insert into user (user_level, user_coins, user_id, user_country) values (3, 5223, 20, 'UNITED_KINGDOM');
 insert into user (user_level, user_coins, user_id, user_country) values (17, 7353, 1, 'FRANCE');
 insert into user (user_level, user_coins, user_id, user_country) values (18, 423, 2, 'FRANCE');
 insert into user (user_level, user_coins, user_id, user_country) values (23, 6858, 3, 'FRANCE');
@@ -119,3 +99,4 @@ insert into user (user_level, user_coins, user_id, user_country) values (22, 196
 insert into user (user_level, user_coins, user_id, user_country) values (21, 5120, 98, 'FRANCE');
 insert into user (user_level, user_coins, user_id, user_country) values (32, 232, 99, 'FRANCE');
 insert into user (user_level, user_coins, user_id, user_country) values (22, 713, 100, 'FRANCE');
+

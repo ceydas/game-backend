@@ -2,13 +2,11 @@ package com.dreamgames.backendengineeringcasestudy.matchmaking.controller;
 
 import com.dreamgames.backendengineeringcasestudy.matchmaking.enums.EnumMatchCoins;
 import com.dreamgames.backendengineeringcasestudy.matchmaking.enums.EnumMatchLevel;
+import com.dreamgames.backendengineeringcasestudy.matchmaking.exception.MatchmakerErrorMessage;
 import com.dreamgames.backendengineeringcasestudy.matchmaking.exception.MatchmakerException;
-import com.dreamgames.backendengineeringcasestudy.tournament.EnumTournament;
 import com.dreamgames.backendengineeringcasestudy.tournament.service.TournamentService;
 import com.dreamgames.backendengineeringcasestudy.user.dto.UserDto;
-import com.dreamgames.backendengineeringcasestudy.user.entity.User;
 import com.dreamgames.backendengineeringcasestudy.user.service.UserService;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,17 +25,19 @@ public class MatchmakerController {
         userService.payCoins(id, EnumMatchCoins.MIN_REQUIRED_COINS_TO_JOIN_TOURNAMENT.coins);
 
         //todo message queue: user enter tournament ticket is issued and queued
+        // new match group
+        // write new match(user_id, tournament_id,group_id)
+
+
+        //todo write new TournamentSession to db using current tournament id, user id and
+        // initialize timestamp, score = 0, claimReward = false
+
+
+
 
         return ResponseEntity.ok(userDto);
     }
 
-    /*
-    @PutMapping("/tournament/{tid}/claim-reward/{id}")
-    public ResponseEntity<UserDto> claimReward(@PathVariable Long tid, @PathVariable Long id){
-        //todo
-    }
-
-     */
 
     private static void validateEnterTournament(UserDto userDto) {
         int userLevel = userDto.getCurrentLevel();

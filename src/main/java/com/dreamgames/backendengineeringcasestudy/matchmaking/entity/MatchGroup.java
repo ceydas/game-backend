@@ -23,7 +23,4 @@ public class MatchGroup {
     @OneToMany(mappedBy = "matchGroup")
     private List<Match> matchList;
 
-
-    int capacity;
-
 }

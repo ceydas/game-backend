@@ -23,7 +23,7 @@ public class TournamentSessionEntityService {
             throw new TournamentSessionException(TournamentSessionErrorMessage.USER_HAS_NO_TOURNAMENT_PARTICIPATION);
         }
 
-        TournamentSession latestTournamentSession = tournamentSessionRepository.findByUserId(id);
+        TournamentSession latestTournamentSession = tournamentSessionRepository.findByUserUserId(id);
         return latestTournamentSession;
     }
 

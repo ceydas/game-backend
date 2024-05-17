@@ -99,3 +99,4 @@ insert into user (user_level, user_coins, user_id, user_country) values (22, 196
 insert into user (user_level, user_coins, user_id, user_country) values (21, 5120, 98, 'FRANCE');
 insert into user (user_level, user_coins, user_id, user_country) values (32, 232, 99, 'FRANCE');
 insert into user (user_level, user_coins, user_id, user_country) values (22, 713, 100, 'FRANCE');
+

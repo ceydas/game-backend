@@ -1,6 +1,7 @@
 package com.dreamgames.backendengineeringcasestudy.user.entity;
 
 import com.dreamgames.backendengineeringcasestudy.matchmaking.entity.Match;
+import com.dreamgames.backendengineeringcasestudy.tournament_session.entity.TournamentSession;
 import com.dreamgames.backendengineeringcasestudy.user.enums.EnumCountry;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -17,6 +18,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="USER_ID")
     private Long userId;
 
     @Column(name="USER_COUNTRY", nullable=false, unique=false)
@@ -33,6 +35,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Match> matchList;
 
-    
+    @OneToOne(mappedBy = "user")
+    private TournamentSession latestTournamentSession;
 
 }
