@@ -44,7 +44,7 @@ public class TournamentEntityService {
     }
 
     public Tournament endTournament(Long id){
-        Tournament tournament = tournamentRepository.findByActiveIsTrue();
+        Tournament tournament = findByIdWithControl(id);
         if (tournament == null){
             throw new TournamentException(TournamentErrorMessage.NO_ACTIVE_TOURNAMENT);
         }

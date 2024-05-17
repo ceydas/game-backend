@@ -15,18 +15,15 @@ import java.util.Optional;
 public class TournamentService {
     private final TournamentEntityService tournamentEntityService;
     @Scheduled(cron = "0 0 0 * * *", zone = "UTC") // At 00:00 UTC
-    public TournamentDto startTournament(){
+    public void startTournament(){
         Tournament tournament = tournamentEntityService.startTournament(LocalDateTime.now());
-        TournamentDto tournamentDto = TournamentConverter.INSTANCE.convertToTournamentDto(tournament);
-        return tournamentDto;
+        //todo log tournament start,end
     }
-
     @Scheduled(cron = "0 0 20 * * *", zone = "UTC") // At 20:00 UTC
-    public TournamentDto endTournament(Long id){
-        Tournament tournament = tournamentEntityService.findByIdWithControl(id);
-        tournamentEntityService.endTournament(id);
-        TournamentDto tournamentDto = TournamentConverter.INSTANCE.convertToTournamentDto(tournament);
-        return tournamentDto;
+    public void endTournament(){
+        TournamentDto tournamentDto = this.findActive();
+        Long activeTournamentId = tournamentDto.getId();
+        tournamentEntityService.endTournament(activeTournamentId);
     }
 
     public TournamentDto findActive(){

@@ -27,6 +27,9 @@ public class TournamentSessionEntityService {
         return latestTournamentSession;
     }
 
+    public boolean userHasClaimedReward(Long id){
+        return tournamentSessionRepository.findDidClaimRewardByUserId(id);
+    }
     public boolean userHasEnteredAnyTournaments(Long id){
         return tournamentSessionRepository.existsById(id);
     }

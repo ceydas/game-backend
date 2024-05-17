@@ -18,4 +18,8 @@ public class TournamentSessionService {
     public boolean userHasEnteredAnyTournaments(Long id){
         return tournamentSessionEntityService.userHasEnteredAnyTournaments(id);
     }
+
+    public boolean userHasClaimedReward(Long id){
+        return tournamentSessionEntityService.userHasClaimedReward(id);
+    }
 }

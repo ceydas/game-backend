@@ -1,5 +1,5 @@
 USE `mysql-db`;
-insert into user (user_level, user_coins, user_id, user_country) values (17, 7353, 1, 'FRANCE');
+insert into user (user_level, user_coins, user_id, user_country) values (17, 10000, 1, 'FRANCE');
 insert into user (user_level, user_coins, user_id, user_country) values (18, 423, 2, 'FRANCE');
 insert into user (user_level, user_coins, user_id, user_country) values (23, 6858, 3, 'FRANCE');
 insert into user (user_level, user_coins, user_id, user_country) values (18, 5220, 4, 'FRANCE');

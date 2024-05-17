@@ -5,6 +5,7 @@ import com.dreamgames.backendengineeringcasestudy.matchmaking.enums.EnumMatchLev
 import com.dreamgames.backendengineeringcasestudy.matchmaking.exception.MatchmakerErrorMessage;
 import com.dreamgames.backendengineeringcasestudy.matchmaking.exception.MatchmakerException;
 import com.dreamgames.backendengineeringcasestudy.tournament.service.TournamentService;
+import com.dreamgames.backendengineeringcasestudy.tournament_session.service.TournamentSessionService;
 import com.dreamgames.backendengineeringcasestudy.user.dto.UserDto;
 import com.dreamgames.backendengineeringcasestudy.user.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ public class MatchmakerController {
 
     private final UserService userService;
     private final TournamentService tournamentService;
+    private final TournamentSessionService tournamentSessionService;
     @PostMapping("/tournament/enter/{id}")
     public ResponseEntity<UserDto> enterTournament(@PathVariable Long id){
         UserDto userDto = userService.getUserDetails(id);
@@ -39,14 +41,20 @@ public class MatchmakerController {
     }
 
 
-    private static void validateEnterTournament(UserDto userDto) {
+    private void validateEnterTournament(UserDto userDto) {
+        Long userId = userDto.getUserId();
         int userLevel = userDto.getCurrentLevel();
         Long userCoins = userDto.getCurrentCoins();
         /* Check if user meets the min. requirements to join a tournament */
         if ((userLevel < EnumMatchLevel.MIN_REQUIRED_LEVEL_TO_JOIN_TOURNAMENT.level) || (userCoins < EnumMatchCoins.MIN_REQUIRED_COINS_TO_JOIN_TOURNAMENT.coins)){
             throw new MatchmakerException(MatchmakerErrorMessage.MINIMUM_REQUIREMENTS_NOT_MET);
         }
-
         // todo : check if user claimed their reward.
+        boolean userHasClaimedReward = tournamentSessionService.userHasClaimedReward(userId);
+        if (!userHasClaimedReward){
+            throw new MatchmakerException(MatchmakerErrorMessage.USER_NOT_CLAIMED_REWARD);
+        }
+
+
     }
 }
