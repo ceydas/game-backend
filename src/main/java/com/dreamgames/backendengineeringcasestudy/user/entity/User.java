@@ -21,6 +21,9 @@ public class User {
     @Column(name="USER_ID")
     private Long userId;
 
+    @Version
+    private Long version;
+
     @Column(name="USER_COUNTRY", nullable=false, unique=false)
     @Enumerated(EnumType.STRING)
     private EnumCountry country;

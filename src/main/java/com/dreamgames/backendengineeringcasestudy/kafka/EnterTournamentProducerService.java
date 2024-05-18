@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class EnterTournamentProducerService {
-    private final KafkaTemplate<String,Object> kafkaTemplate;
+    private final KafkaTemplate<String,EnterTournamentProducerDto> kafkaTemplate;
 
     public void send(EnterTournamentProducerDto dto){
-        this.kafkaTemplate.send("enter-tournament",dto.toString());
-        System.out.println("Message is sent to kafka ");
+            this.kafkaTemplate.send("enter-tournament",dto);
+
     }
 
 }

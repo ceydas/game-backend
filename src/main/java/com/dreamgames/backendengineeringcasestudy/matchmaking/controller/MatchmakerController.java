@@ -15,6 +15,7 @@ import com.dreamgames.backendengineeringcasestudy.tournament.service.TournamentS
 import com.dreamgames.backendengineeringcasestudy.tournament_session.service.TournamentSessionService;
 import com.dreamgames.backendengineeringcasestudy.user.dto.UserDto;
 import com.dreamgames.backendengineeringcasestudy.user.service.UserService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,16 +29,21 @@ public class MatchmakerController {
     private final TournamentSessionService tournamentSessionService;
     private final EnterTournamentProducerService enterTournamentProducerService;
 
-    @PostMapping("/kafka")
-    public String testKafka(@RequestBody EnterTournamentProducerDto dto){
-        enterTournamentProducerService.send(dto);
-        return "Message sent";
-    }
+
     @PostMapping("/tournament/enter/{id}")
+    @Transactional(rollbackOn = Exception.class)
     public ResponseEntity<UserDto> enterTournament(@PathVariable Long id){
         UserDto userDto = userService.getUserDetails(id);
         validateEnterTournament(userDto);
 
+        Long currentTournamentId = tournamentService.findCurrentTournamentId();
+        EnterTournamentProducerDto enterTournamentProducerDto = new EnterTournamentProducerDto(
+                id,
+                userDto.getCountry(),
+                currentTournamentId
+        );
+
+        enterTournamentProducerService.send(enterTournamentProducerDto);
         //todo message queue: user enter tournament ticket is issued and queued
         // new match group
         // write new match(user_id, tournament_id,group_id)
@@ -54,7 +60,8 @@ public class MatchmakerController {
     }
 
 
-    private void validateEnterTournament(UserDto userDto) {
+    @Transactional
+    public void validateEnterTournament(UserDto userDto) {
         Long userId = userDto.getUserId();
         int userLevel = userDto.getCurrentLevel();
         Long userCoins = userDto.getCurrentCoins();
@@ -70,6 +77,7 @@ public class MatchmakerController {
         /* Check if user claimed their reward. */
         boolean userHasClaimedReward = tournamentSessionService.userHasClaimedReward(userId);
 
+
         /* If user did have any prior tournaments and left their rewards unclaimed, throw an error
         they cannot join!
          */
@@ -78,8 +86,11 @@ public class MatchmakerController {
         }
 
         /* Check if user meets the min. requirements to join a tournament */
-        if ((userLevel < EnumMatchLevel.MIN_REQUIRED_LEVEL_TO_JOIN_TOURNAMENT.level) || (userCoins < EnumMatchCoins.MIN_REQUIRED_COINS_TO_JOIN_TOURNAMENT.coins)){
-            throw new MatchmakerException(MatchmakerErrorMessage.MINIMUM_REQUIREMENTS_NOT_MET);
+        if (userLevel < EnumMatchLevel.MIN_REQUIRED_LEVEL_TO_JOIN_TOURNAMENT.level){
+            throw new MatchmakerException(MatchmakerErrorMessage.LEVEL_NOT_SUFFICIENT);
+        }
+        if (userCoins < EnumMatchCoins.MIN_REQUIRED_COINS_TO_JOIN_TOURNAMENT.coins){
+            throw new MatchmakerException(MatchmakerErrorMessage.NOT_ENOUGH_COINS);
         }
 
     }

@@ -9,6 +9,8 @@ public enum UserErrorMessage {
     NO_USERS("No user found in the database!"),
     PARAMETER_CANNOT_BE_NULL("Parameter cannot be null"),
 
+    CONCURRENT_WRITE("Cannot update user level concurrently."),
+
     INSUFFICIENT_COINS("User has insufficient coins");
 
     private String message;

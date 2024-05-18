@@ -20,6 +20,9 @@ public class MatchGroup {
     @Column(name = "MATCH_GROUP_ID")
     private Long groupId;
 
+    @Version
+    private Long version;
+
     @OneToMany(mappedBy = "matchGroup")
     private List<Match> matchList;
 

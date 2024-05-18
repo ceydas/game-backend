@@ -1,5 +1,6 @@
 package com.dreamgames.backendengineeringcasestudy.matchmaking.service;
 
+import com.dreamgames.backendengineeringcasestudy.kafka.dto.EnterTournamentProducerDto;
 import com.dreamgames.backendengineeringcasestudy.matchmaking.dto.MatchGroupDto;
 import com.dreamgames.backendengineeringcasestudy.matchmaking.service.entityservice.MatchmakerEntityService;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +14,8 @@ public class MatchmakerService {
     private final MatchmakerEntityService matchmakerEntityService;
 
     @KafkaListener(topics = {"enter-tournament"}, groupId = "app-1")
-    public void consumeEnterTournamentTicket(ConsumerRecord<String,String> payload){
-        System.out.println(payload);
+    public void consumeEnterTournamentTicket(EnterTournamentProducerDto dto){
+        System.out.println(dto);
     }
 
 }

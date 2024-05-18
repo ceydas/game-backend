@@ -20,6 +20,9 @@ public class TournamentSession {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tournamentSessionId;
 
+    @Version
+    private Long version;
+
     @OneToOne
     @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID", nullable = false, unique = true)
     private User user;

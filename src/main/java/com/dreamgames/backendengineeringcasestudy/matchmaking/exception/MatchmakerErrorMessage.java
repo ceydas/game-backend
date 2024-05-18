@@ -1,7 +1,9 @@
 package com.dreamgames.backendengineeringcasestudy.matchmaking.exception;
 
 public enum MatchmakerErrorMessage {
-    MINIMUM_REQUIREMENTS_NOT_MET("User doesn't meet the minimum criteria to join the tournament."),
+    NOT_ENOUGH_COINS("User doesn't have enough coins to join the tournament"),
+
+    LEVEL_NOT_SUFFICIENT("User level is insufficient to join the tournament"),
 
     MATCH_GROUP_CAPACITY_INVALID("Invalid match group capacity."),
 

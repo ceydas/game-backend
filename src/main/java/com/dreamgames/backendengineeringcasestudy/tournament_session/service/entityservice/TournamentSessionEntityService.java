@@ -28,6 +28,9 @@ public class TournamentSessionEntityService {
     }
 
     public boolean userHasClaimedReward(Long id){
+        if (!userHasEnteredAnyTournaments(id)){
+            return false;
+        }
         return tournamentSessionRepository.findDidClaimRewardByUserId(id);
     }
     public boolean userHasEnteredAnyTournaments(Long id){
