@@ -77,7 +77,7 @@ public class UserService {
         return userDto;
     }
 
-    public UserDto getCoins(Long id, Long amount){
+    public UserDto addCoins(Long id, Long amount){
         User user = userEntityService.findByIdWithControl(id);
         Long currentCoins = user.getCurrentCoins();
         user.setCurrentCoins(currentCoins + amount);

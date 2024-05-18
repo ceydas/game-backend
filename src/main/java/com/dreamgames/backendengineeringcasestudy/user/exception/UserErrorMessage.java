@@ -4,6 +4,8 @@ public enum UserErrorMessage {
 
     USER_NOT_FOUND("User not found!"),
 
+    USER_NULL("User is null"),
+
     NO_USERS("No user found in the database!"),
     PARAMETER_CANNOT_BE_NULL("Parameter cannot be null"),
 

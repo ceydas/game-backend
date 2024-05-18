@@ -50,10 +50,12 @@ public class UserEntityService {
 
     public User createAndSaveUser(){
         User user = create();
+        if (user == null){
+            throw new UserException(UserErrorMessage.USER_NULL);
+        }
         return userRepository.save(user);
 
     }
-
 
 
     public User findByIdWithControl(Long id){

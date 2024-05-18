@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -30,7 +31,7 @@ public class TournamentSession {
     @Column(columnDefinition = "INT DEFAULT 0", nullable = false)
     private Long reward;
 
-    private Timestamp joinedAt;
+    private LocalDateTime joinedAt;
 
     @Column(columnDefinition = "BOOLEAN DEFAULT FALSE", nullable = false)
     private boolean didClaimReward;
