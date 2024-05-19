@@ -1,5 +1,9 @@
 package com.dreamgames.backendengineeringcasestudy.user.service;
 
+import com.dreamgames.backendengineeringcasestudy.leaderboard.service.LeaderboardService;
+import com.dreamgames.backendengineeringcasestudy.tournament.service.TournamentService;
+import com.dreamgames.backendengineeringcasestudy.tournament_session.entity.TournamentSession;
+import com.dreamgames.backendengineeringcasestudy.tournament_session.service.TournamentSessionService;
 import com.dreamgames.backendengineeringcasestudy.user.converter.UserDtoConverter;
 import com.dreamgames.backendengineeringcasestudy.user.dto.UserDto;
 import com.dreamgames.backendengineeringcasestudy.user.dto.UserUpdateLevelRequestDto;
@@ -21,6 +25,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
     private final UserEntityService userEntityService;
+    private final TournamentService tournamentService;
+    private final TournamentSessionService tournamentSessionService;
+    private final LeaderboardService leaderboardService;
+
 
     public List<UserDto> findAll() {
         List<User> userList = userEntityService.findAll();
@@ -88,6 +96,7 @@ public class UserService {
         return userDto;
     }
 
+    @Transactional
     public UserUpdateResponseDto completeLevel(Long id){
         User user = userEntityService.findByIdWithControl(id);
 
@@ -100,6 +109,13 @@ public class UserService {
         user.setCurrentLevel(newLevel);
         user.setCurrentCoins(newCoins);
         userEntityService.save(user);
+
+        //todo
+        // If there's an active tournament, update the leaderboard
+        boolean activeTournamentExists = tournamentService.activeTournamentExists();
+        if (activeTournamentExists){
+            leaderboardService.updateUserScore(user.getUserId(), user.getCountry());
+        }
 
         UserUpdateResponseDto updateResponseDto = UserUpdateResponseDto.builder()
                 .id(id)
