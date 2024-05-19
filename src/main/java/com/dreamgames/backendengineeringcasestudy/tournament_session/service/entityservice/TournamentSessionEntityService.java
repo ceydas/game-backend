@@ -14,6 +14,10 @@ public class TournamentSessionEntityService {
 
     private final TournamentSessionRepository tournamentSessionRepository;
 
+    public TournamentSession save(TournamentSession tournamentSession){
+        return tournamentSessionRepository.save(tournamentSession);
+    }
+
     /** This method assumes that the user has entered a tournament before.
     * Else, it will throw an exception. **/
     public TournamentSession getLatestTournamentSessionByUserId(Long id){

@@ -42,20 +42,7 @@ public class MatchmakerController {
                 userDto.getCountry(),
                 currentTournamentId
         );
-
         enterTournamentProducerService.send(enterTournamentProducerDto);
-        //todo message queue: user enter tournament ticket is issued and queued
-        // new match group
-        // write new match(user_id, tournament_id,group_id)
-
-
-        //todo write new TournamentSession to db using current tournament id, user id and
-        // initialize timestamp, score = 0, claimReward = false
-
-        userService.payCoins(id, EnumMatchCoins.MIN_REQUIRED_COINS_TO_JOIN_TOURNAMENT.coins);
-
-
-
         return ResponseEntity.ok(userDto);
     }
 

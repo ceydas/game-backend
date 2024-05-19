@@ -15,22 +15,20 @@ import java.time.LocalDateTime;
 @Table(name = "GAME_MATCH")
 public class Match {
 
-    @EmbeddedId
-    @Column(name = "MATCH_ID")
-    private MatchId matchId;
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="MATCH_ID")
+    private Long matchId;
 
     @ManyToOne
-    @MapsId("userId")
     @JoinColumn(name = "USER_ID")
     private User user;
 
     @ManyToOne
-    @MapsId("groupId")
     @JoinColumn(name = "GROUP_ID")
     private MatchGroup matchGroup;
 
     @ManyToOne
-    @MapsId("tournamentId")
     @JoinColumn(name = "TOURNAMENT_ID")
     private Tournament tournament;
 
