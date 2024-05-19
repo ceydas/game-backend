@@ -10,6 +10,8 @@ import com.dreamgames.backendengineeringcasestudy.user.enums.EnumReward;
 import com.dreamgames.backendengineeringcasestudy.user.exception.UserErrorMessage;
 import com.dreamgames.backendengineeringcasestudy.user.exception.UserException;
 import com.dreamgames.backendengineeringcasestudy.user.service.entityservice.UserEntityService;
+import jakarta.persistence.OptimisticLockException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -48,6 +50,7 @@ public class UserService {
     }
 
 
+    @Transactional
     public UserDto updateLevel(UserUpdateLevelRequestDto updateLevelRequestDto){
         Long userId = updateLevelRequestDto.getUserId();
         int newLevel = updateLevelRequestDto.getNewLevel();
@@ -56,14 +59,13 @@ public class UserService {
         User user = userEntityService.findByIdWithControl(userId);
         user.setCurrentLevel(newLevel);
         user.setCurrentCoins(newCoins);
-
         userEntityService.save(user);
-
         UserDto userDto = UserDtoConverter.INSTANCE.convertToUserDto(user);
 
         return userDto;
     }
 
+    @Transactional
     public UserDto payCoins(Long id, Long amount){
         User user = userEntityService.findByIdWithControl(id);
         Long currentCoins = user.getCurrentCoins();
@@ -77,7 +79,7 @@ public class UserService {
         return userDto;
     }
 
-    public UserDto getCoins(Long id, Long amount){
+    public UserDto addCoins(Long id, Long amount){
         User user = userEntityService.findByIdWithControl(id);
         Long currentCoins = user.getCurrentCoins();
         user.setCurrentCoins(currentCoins + amount);
@@ -114,7 +116,7 @@ public class UserService {
                 .userId(id)
                 .currentLevel(user.getCurrentLevel())
                 .currentCoins(user.getCurrentCoins())
-                .country(user.getCountry().toString()).build();
+                .country(user.getCountry()).build();
 
         return userDto;
 

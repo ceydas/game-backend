@@ -11,6 +11,7 @@ com/dreamgames/backendengineeringcasestudy/user/dto/UserUpdateResponseDto$UserUp
 com/dreamgames/backendengineeringcasestudy/matchmaking/enums/EnumMatchCoins.class
 com/dreamgames/backendengineeringcasestudy/user/service/entityservice/UserEntityService.class
 com/dreamgames/backendengineeringcasestudy/user/entity/User.class
+com/dreamgames/backendengineeringcasestudy/kafka/dto/EnterTournamentProducerDto.class
 com/dreamgames/backendengineeringcasestudy/user/dto/UserUpdateLevelRequestDto.class
 com/dreamgames/backendengineeringcasestudy/matchmaking/repository/MatchGroupRepository.class
 com/dreamgames/backendengineeringcasestudy/user/converter/UserDtoConverter.class
@@ -22,6 +23,7 @@ com/dreamgames/backendengineeringcasestudy/matchmaking/service/entityservice/Mat
 com/dreamgames/backendengineeringcasestudy/tournament/exception/TournamentException.class
 com/dreamgames/backendengineeringcasestudy/user/dto/UserDto.class
 com/dreamgames/backendengineeringcasestudy/user/enums/EnumLevel.class
+com/dreamgames/backendengineeringcasestudy/kafka/EnterTournamentProducerService.class
 com/dreamgames/backendengineeringcasestudy/user/util/CountryPickerUtil.class
 com/dreamgames/backendengineeringcasestudy/leaderboard/dto/CountryLeaderboardDto$CountryLeaderboardDtoBuilder.class
 com/dreamgames/backendengineeringcasestudy/matchmaking/controller/MatchmakerController.class
@@ -38,6 +40,7 @@ com/dreamgames/backendengineeringcasestudy/leaderboard/dto/GroupRankDto.class
 com/dreamgames/backendengineeringcasestudy/tournament/service/entityservice/TournamentEntityService.class
 com/dreamgames/backendengineeringcasestudy/tournament_session/exception/TournamentSessionErrorMessage.class
 com/dreamgames/backendengineeringcasestudy/tournament_session/controller/TournamentSessionController.class
+com/dreamgames/backendengineeringcasestudy/matchmaking/dto/MatchGroupSaveDto.class
 com/dreamgames/backendengineeringcasestudy/tournament/service/TournamentService.class
 com/dreamgames/backendengineeringcasestudy/leaderboard/dto/GroupLeaderboardDto$GroupLeaderboardDtoBuilder.class
 com/dreamgames/backendengineeringcasestudy/matchmaking/entity/Match.class

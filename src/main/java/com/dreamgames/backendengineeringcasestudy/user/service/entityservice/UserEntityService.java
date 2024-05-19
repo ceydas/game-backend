@@ -9,6 +9,8 @@ import com.dreamgames.backendengineeringcasestudy.user.exception.UserErrorMessag
 import com.dreamgames.backendengineeringcasestudy.user.exception.UserException;
 import com.dreamgames.backendengineeringcasestudy.user.repository.UserRepository;
 import com.dreamgames.backendengineeringcasestudy.user.util.CountryPickerUtil;
+import jakarta.persistence.LockModeType;
+import jakarta.persistence.OptimisticLockException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +37,13 @@ public class UserEntityService {
         return userRepository.existsByCountry(country);
     }
     public User save(User user){
-        return userRepository.save(user);
+        try {
+            userRepository.save(user);
+        } catch (OptimisticLockException e){
+            System.out.println(UserErrorMessage.CONCURRENT_WRITE);
+            //todo log
+        }
+        return user;
     }
 
     public static User create(){
@@ -50,10 +58,12 @@ public class UserEntityService {
 
     public User createAndSaveUser(){
         User user = create();
+        if (user == null){
+            throw new UserException(UserErrorMessage.USER_NULL);
+        }
         return userRepository.save(user);
 
     }
-
 
 
     public User findByIdWithControl(Long id){

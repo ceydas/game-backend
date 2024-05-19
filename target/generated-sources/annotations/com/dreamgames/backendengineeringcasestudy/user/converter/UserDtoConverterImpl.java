@@ -2,14 +2,13 @@ package com.dreamgames.backendengineeringcasestudy.user.converter;
 
 import com.dreamgames.backendengineeringcasestudy.user.dto.UserDto;
 import com.dreamgames.backendengineeringcasestudy.user.entity.User;
-import com.dreamgames.backendengineeringcasestudy.user.enums.EnumCountry;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-17T22:08:28+0300",
+    date = "2024-05-19T03:31:47+0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 19.0.1 (Oracle Corporation)"
 )
 public class UserDtoConverterImpl implements UserDtoConverter {
@@ -23,9 +22,7 @@ public class UserDtoConverterImpl implements UserDtoConverter {
         User user = new User();
 
         user.setUserId( userDto.getUserId() );
-        if ( userDto.getCountry() != null ) {
-            user.setCountry( Enum.valueOf( EnumCountry.class, userDto.getCountry() ) );
-        }
+        user.setCountry( userDto.getCountry() );
         user.setCurrentCoins( userDto.getCurrentCoins() );
         user.setCurrentLevel( userDto.getCurrentLevel() );
 
@@ -41,9 +38,7 @@ public class UserDtoConverterImpl implements UserDtoConverter {
         UserDto.UserDtoBuilder userDto = UserDto.builder();
 
         userDto.userId( user.getUserId() );
-        if ( user.getCountry() != null ) {
-            userDto.country( user.getCountry().name() );
-        }
+        userDto.country( user.getCountry() );
         userDto.currentCoins( user.getCurrentCoins() );
         userDto.currentLevel( user.getCurrentLevel() );
 
