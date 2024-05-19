@@ -3,7 +3,10 @@ package com.dreamgames.backendengineeringcasestudy.user.service;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.dreamgames.backendengineeringcasestudy.leaderboard.service.LeaderboardService;
 import com.dreamgames.backendengineeringcasestudy.matchmaking.enums.EnumMatchCoins;
+import com.dreamgames.backendengineeringcasestudy.tournament.service.TournamentService;
+import com.dreamgames.backendengineeringcasestudy.tournament_session.service.TournamentSessionService;
 import com.dreamgames.backendengineeringcasestudy.user.dto.UserDto;
 import com.dreamgames.backendengineeringcasestudy.user.dto.UserUpdateLevelRequestDto;
 import com.dreamgames.backendengineeringcasestudy.user.dto.UserUpdateResponseDto;
@@ -28,6 +31,12 @@ public class UserServiceTest {
 
     @Mock
     private UserEntityService userEntityService;
+    @Mock
+    private  TournamentService tournamentService;
+    @Mock
+    private  TournamentSessionService tournamentSessionService;
+    @Mock
+    private  LeaderboardService leaderboardService;
 
     @InjectMocks
     private UserService userService;

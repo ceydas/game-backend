@@ -1,3 +1,18 @@
+# Maven build directory
+/target/
+
+# Maven status files
+/target/maven-status/
+
+# Surefire test reports
+/target/surefire-reports/
+
+# Generated sources
+/target/generated-sources/
+
+# Compiled classes and other build outputs
+/target/classes/
+
 # Compiled class file
 *.class
 
