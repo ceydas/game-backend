@@ -35,4 +35,12 @@ public class TournamentService {
         return tournamentDto;
     }
 
+    public boolean activeTournamentExists(){
+        Tournament tournament = tournamentEntityService.findActive();
+        if (tournament == null){
+            return false;
+        }
+        return true;
+    }
+
 }

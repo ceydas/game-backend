@@ -36,5 +36,14 @@ public enum EnumCountry {
         }
         throw new IllegalArgumentException("No country found with name: " + name);
     }
+
+    public static EnumCountry getByCode(String countryCode) {
+        for (EnumCountry country : EnumCountry.values()) {
+            if (country.code.equalsIgnoreCase(countryCode)) {
+                return country;
+            }
+        }
+        throw new IllegalArgumentException("No country found with name: " + countryCode);
+    }
 }
 

@@ -8,4 +8,8 @@ public enum EnumTournamentSession {
     EnumTournamentSession(Long reward) {
         this.reward = reward;
     }
+
+    public Long getReward() {
+        return reward;
+    }
 }
