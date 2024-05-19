@@ -35,9 +35,19 @@ public class TournamentSessionEntityService {
         if (!userHasEnteredAnyTournaments(id)){
             return false;
         }
-        return tournamentSessionRepository.findDidClaimRewardByUserId(id);
+        return findDidClaimRewardByUserId(id);
     }
     public boolean userHasEnteredAnyTournaments(Long id){
-        return tournamentSessionRepository.existsById(id);
+        return tournamentSessionRepository.existsByUserUserId(id);
+    }
+
+    public boolean findDidClaimRewardByUserId(Long id){
+        TournamentSession tournamentSession = tournamentSessionRepository.findByUserUserId(id);
+
+        if (tournamentSession == null){
+            throw new TournamentSessionException(TournamentSessionErrorMessage.USER_HAS_NO_TOURNAMENT_PARTICIPATION);
+        }
+
+        return tournamentSession.isDidClaimReward();
     }
 }

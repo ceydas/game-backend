@@ -10,8 +10,7 @@ import org.springframework.data.repository.query.Param;
 public interface TournamentSessionRepository extends CrudRepository<TournamentSession, Long> {
 
     public boolean existsByUserUserId(Long userId);
-    @Query(value = "SELECT didClaimReward FROM tournament_session WHERE user_id = :id", nativeQuery = true)
-    public boolean findDidClaimRewardByUserId(@Param("id") Long id);
+
     public TournamentSession findByUserUserId(Long id);
 
 }
