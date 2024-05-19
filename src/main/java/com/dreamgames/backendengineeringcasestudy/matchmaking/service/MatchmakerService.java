@@ -1,13 +1,11 @@
 package com.dreamgames.backendengineeringcasestudy.matchmaking.service;
 
 import com.dreamgames.backendengineeringcasestudy.kafka.dto.EnterTournamentProducerDto;
-import com.dreamgames.backendengineeringcasestudy.matchmaking.dto.MatchGroupDto;
 import com.dreamgames.backendengineeringcasestudy.matchmaking.entity.Match;
 import com.dreamgames.backendengineeringcasestudy.matchmaking.entity.MatchGroup;
 import com.dreamgames.backendengineeringcasestudy.matchmaking.enums.EnumMatchCoins;
 import com.dreamgames.backendengineeringcasestudy.matchmaking.service.entityservice.MatchmakerEntityService;
 import com.dreamgames.backendengineeringcasestudy.tournament.entity.Tournament;
-import com.dreamgames.backendengineeringcasestudy.tournament.service.TournamentService;
 import com.dreamgames.backendengineeringcasestudy.tournament.service.entityservice.TournamentEntityService;
 import com.dreamgames.backendengineeringcasestudy.tournament_session.entity.TournamentSession;
 import com.dreamgames.backendengineeringcasestudy.tournament_session.service.entityservice.TournamentSessionEntityService;
@@ -16,7 +14,6 @@ import com.dreamgames.backendengineeringcasestudy.user.service.UserService;
 import com.dreamgames.backendengineeringcasestudy.user.service.entityservice.UserEntityService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
@@ -61,5 +58,12 @@ public class MatchmakerService {
         
     }
 
+    public Match findMatchByUserId(Long id){
+        return matchmakerEntityService.findByUserIdWithControl(id);
+    }
 
+
+    public boolean existsByUserAndTournament(User user, Tournament tournament){
+        return matchmakerEntityService.existsByUserAndTournament(user, tournament);
+    }
 }

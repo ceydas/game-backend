@@ -8,6 +8,7 @@ import com.dreamgames.backendengineeringcasestudy.matchmaking.exception.Matchmak
 import com.dreamgames.backendengineeringcasestudy.matchmaking.exception.MatchmakerException;
 import com.dreamgames.backendengineeringcasestudy.matchmaking.repository.MatchGroupRepository;
 import com.dreamgames.backendengineeringcasestudy.matchmaking.repository.MatchRepository;
+import com.dreamgames.backendengineeringcasestudy.tournament.entity.Tournament;
 import com.dreamgames.backendengineeringcasestudy.user.entity.User;
 import com.dreamgames.backendengineeringcasestudy.user.exception.UserErrorMessage;
 import com.dreamgames.backendengineeringcasestudy.user.exception.UserException;
@@ -63,15 +64,17 @@ public class MatchmakerEntityService {
     }
 
 
-    //todo
-    /*
-    public Match createAndSaveMatch(){
-
+    public Match findByUserIdWithControl(Long id){
+        Match match = matchRepository.findByUserUserId(id);
+        if (match == null){
+            throw new MatchmakerException(MatchmakerErrorMessage.MATCH_NOT_FOUND);
+        }
+        return match;
     }
 
-     */
-
-
+    public boolean existsByUserAndTournament(User user, Tournament tournament){
+        return matchRepository.existsByUserAndTournament(user, tournament);
+    }
 
 
 

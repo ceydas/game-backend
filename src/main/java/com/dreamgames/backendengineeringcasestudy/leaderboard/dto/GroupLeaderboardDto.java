@@ -10,7 +10,7 @@ import lombok.Setter;
 @Builder
 public class GroupLeaderboardDto {
 
+    Long groupId;
     Long userId;
     EnumCountry country;
-    Long userTournamentScore;
 }

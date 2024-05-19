@@ -1,8 +1,14 @@
 package com.dreamgames.backendengineeringcasestudy.user.service;
 
+import com.dreamgames.backendengineeringcasestudy.leaderboard.dto.GroupLeaderboardDto;
 import com.dreamgames.backendengineeringcasestudy.leaderboard.service.LeaderboardService;
+import com.dreamgames.backendengineeringcasestudy.matchmaking.entity.Match;
+import com.dreamgames.backendengineeringcasestudy.matchmaking.entity.MatchGroup;
+import com.dreamgames.backendengineeringcasestudy.matchmaking.service.MatchmakerService;
+import com.dreamgames.backendengineeringcasestudy.matchmaking.service.entityservice.MatchmakerEntityService;
+import com.dreamgames.backendengineeringcasestudy.tournament.entity.Tournament;
 import com.dreamgames.backendengineeringcasestudy.tournament.service.TournamentService;
-import com.dreamgames.backendengineeringcasestudy.tournament_session.entity.TournamentSession;
+import com.dreamgames.backendengineeringcasestudy.tournament.service.entityservice.TournamentEntityService;
 import com.dreamgames.backendengineeringcasestudy.tournament_session.service.TournamentSessionService;
 import com.dreamgames.backendengineeringcasestudy.user.converter.UserDtoConverter;
 import com.dreamgames.backendengineeringcasestudy.user.dto.UserDto;
@@ -14,7 +20,6 @@ import com.dreamgames.backendengineeringcasestudy.user.enums.EnumReward;
 import com.dreamgames.backendengineeringcasestudy.user.exception.UserErrorMessage;
 import com.dreamgames.backendengineeringcasestudy.user.exception.UserException;
 import com.dreamgames.backendengineeringcasestudy.user.service.entityservice.UserEntityService;
-import jakarta.persistence.OptimisticLockException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,8 +30,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
     private final UserEntityService userEntityService;
-    private final TournamentService tournamentService;
-    private final TournamentSessionService tournamentSessionService;
     private final LeaderboardService leaderboardService;
 
 
@@ -112,10 +115,8 @@ public class UserService {
 
         //todo
         // If there's an active tournament, update the leaderboard
-        boolean activeTournamentExists = tournamentService.activeTournamentExists();
-        if (activeTournamentExists){
-            leaderboardService.updateUserScore(user.getUserId(), user.getCountry());
-        }
+        leaderboardService.updateUserScore(user);
+
 
         UserUpdateResponseDto updateResponseDto = UserUpdateResponseDto.builder()
                 .id(id)

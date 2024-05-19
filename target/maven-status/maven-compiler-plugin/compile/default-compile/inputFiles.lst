@@ -1,6 +1,9 @@
 /Users/ceydog/Desktop/github_repos/dream-backend-case-study/src/main/java/com/dreamgames/backendengineeringcasestudy/leaderboard/dto/GroupRankDto.java
 /Users/ceydog/Desktop/github_repos/dream-backend-case-study/src/main/java/com/dreamgames/backendengineeringcasestudy/tournament/repository/TournamentRepository.java
 /Users/ceydog/Desktop/github_repos/dream-backend-case-study/src/main/java/com/dreamgames/backendengineeringcasestudy/user/service/UserService.java
+/Users/ceydog/Desktop/github_repos/dream-backend-case-study/src/main/java/com/dreamgames/backendengineeringcasestudy/tournament_session/TournamentSessionDto.java
+/Users/ceydog/Desktop/github_repos/dream-backend-case-study/src/main/java/com/dreamgames/backendengineeringcasestudy/redis/config/RedisConfig.java
+/Users/ceydog/Desktop/github_repos/dream-backend-case-study/src/main/java/com/dreamgames/backendengineeringcasestudy/leaderboard/controller/LeaderboardController.java
 /Users/ceydog/Desktop/github_repos/dream-backend-case-study/src/main/java/com/dreamgames/backendengineeringcasestudy/BackendEngineeringCaseStudyApplication.java
 /Users/ceydog/Desktop/github_repos/dream-backend-case-study/src/main/java/com/dreamgames/backendengineeringcasestudy/tournament/EnumTournament.java
 /Users/ceydog/Desktop/github_repos/dream-backend-case-study/src/main/java/com/dreamgames/backendengineeringcasestudy/user/enums/EnumReward.java
@@ -9,6 +12,7 @@
 /Users/ceydog/Desktop/github_repos/dream-backend-case-study/src/main/java/com/dreamgames/backendengineeringcasestudy/user/exception/UserErrorMessage.java
 /Users/ceydog/Desktop/github_repos/dream-backend-case-study/src/main/java/com/dreamgames/backendengineeringcasestudy/user/repository/UserRepository.java
 /Users/ceydog/Desktop/github_repos/dream-backend-case-study/src/main/java/com/dreamgames/backendengineeringcasestudy/user/enums/EnumLevel.java
+/Users/ceydog/Desktop/github_repos/dream-backend-case-study/src/main/java/com/dreamgames/backendengineeringcasestudy/leaderboard/service/LeaderboardService.java
 /Users/ceydog/Desktop/github_repos/dream-backend-case-study/src/main/java/com/dreamgames/backendengineeringcasestudy/tournament/service/entityservice/TournamentEntityService.java
 /Users/ceydog/Desktop/github_repos/dream-backend-case-study/src/main/java/com/dreamgames/backendengineeringcasestudy/matchmaking/entity/MatchGroup.java
 /Users/ceydog/Desktop/github_repos/dream-backend-case-study/src/main/java/com/dreamgames/backendengineeringcasestudy/tournament/converter/TournamentConverter.java

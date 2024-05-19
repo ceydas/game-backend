@@ -26,7 +26,7 @@ public class TournamentEntityService {
     }
 
     public Tournament findActive(){
-        /*Warning: check null handling*/
+        // Warning: no null handling.
         Tournament tournament = tournamentRepository.findByActiveIsTrue();
         return tournament;
     }

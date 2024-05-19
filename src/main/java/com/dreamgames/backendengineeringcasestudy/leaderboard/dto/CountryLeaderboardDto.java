@@ -9,7 +9,5 @@ import lombok.Data;
 public class CountryLeaderboardDto {
     EnumCountry country;
     Long userId;
-    Long userScore;
-    Long totalScoreByCountry;
 
 }

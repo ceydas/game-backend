@@ -1,6 +1,7 @@
 com/dreamgames/backendengineeringcasestudy/leaderboard/dto/GroupLeaderboardDto.class
 com/dreamgames/backendengineeringcasestudy/matchmaking/composite/MatchId.class
 com/dreamgames/backendengineeringcasestudy/matchmaking/dto/MatchDto.class
+com/dreamgames/backendengineeringcasestudy/redis/config/RedisConfig.class
 com/dreamgames/backendengineeringcasestudy/leaderboard/dto/GroupRankDto$GroupRankDtoBuilder.class
 com/dreamgames/backendengineeringcasestudy/matchmaking/repository/MatchRepository.class
 com/dreamgames/backendengineeringcasestudy/matchmaking/exception/MatchmakerException.class
@@ -43,10 +44,12 @@ com/dreamgames/backendengineeringcasestudy/tournament_session/controller/Tournam
 com/dreamgames/backendengineeringcasestudy/matchmaking/dto/MatchGroupSaveDto.class
 com/dreamgames/backendengineeringcasestudy/tournament/service/TournamentService.class
 com/dreamgames/backendengineeringcasestudy/leaderboard/dto/GroupLeaderboardDto$GroupLeaderboardDtoBuilder.class
+com/dreamgames/backendengineeringcasestudy/leaderboard/service/LeaderboardService.class
 com/dreamgames/backendengineeringcasestudy/matchmaking/entity/Match.class
 com/dreamgames/backendengineeringcasestudy/tournament/repository/TournamentRepository.class
 com/dreamgames/backendengineeringcasestudy/user/dto/UserDto$UserDtoBuilder.class
 com/dreamgames/backendengineeringcasestudy/user/converter/UserDtoConverterImpl.class
+com/dreamgames/backendengineeringcasestudy/tournament_session/TournamentSessionDto.class
 com/dreamgames/backendengineeringcasestudy/matchmaking/entity/MatchGroup.class
 com/dreamgames/backendengineeringcasestudy/matchmaking/enums/EnumMatchCapacity.class
 com/dreamgames/backendengineeringcasestudy/user/exception/UserException.class
@@ -61,4 +64,5 @@ com/dreamgames/backendengineeringcasestudy/tournament_session/TournamentSessionR
 com/dreamgames/backendengineeringcasestudy/matchmaking/exception/MatchmakerErrorMessage.class
 com/dreamgames/backendengineeringcasestudy/user/enums/EnumReward.class
 com/dreamgames/backendengineeringcasestudy/tournament/converter/TournamentConverterImpl.class
+com/dreamgames/backendengineeringcasestudy/leaderboard/controller/LeaderboardController.class
 com/dreamgames/backendengineeringcasestudy/matchmaking/service/MatchmakerService.class
