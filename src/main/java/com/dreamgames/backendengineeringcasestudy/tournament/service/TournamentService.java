@@ -2,6 +2,8 @@ package com.dreamgames.backendengineeringcasestudy.tournament.service;
 import com.dreamgames.backendengineeringcasestudy.tournament.converter.TournamentConverter;
 import com.dreamgames.backendengineeringcasestudy.tournament.dto.TournamentDto;
 import com.dreamgames.backendengineeringcasestudy.tournament.entity.Tournament;
+import com.dreamgames.backendengineeringcasestudy.tournament.exception.TournamentErrorMessage;
+import com.dreamgames.backendengineeringcasestudy.tournament.exception.TournamentException;
 import com.dreamgames.backendengineeringcasestudy.tournament.service.entityservice.TournamentEntityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -41,6 +43,13 @@ public class TournamentService {
             return false;
         }
         return true;
+    public Long findCurrentTournamentId(){
+        Tournament tournament = tournamentEntityService.findActive();
+        if (tournament == null){
+            throw new TournamentException(TournamentErrorMessage.NO_ACTIVE_TOURNAMENT);
+        }
+
+        return tournament.getId();
     }
 
 }

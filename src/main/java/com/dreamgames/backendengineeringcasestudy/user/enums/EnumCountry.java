@@ -1,5 +1,7 @@
 package com.dreamgames.backendengineeringcasestudy.user.enums;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 public enum EnumCountry {
     TURKEY("Turkey", "TR"),
     UNITED_STATES("United States", "US"),
@@ -44,6 +46,9 @@ public enum EnumCountry {
             }
         }
         throw new IllegalArgumentException("No country found with name: " + countryCode);
+    @JsonCreator
+    public static EnumCountry fromString(String key) {
+        return key == null ? null : EnumCountry.valueOf(key.toUpperCase());
     }
 }
 

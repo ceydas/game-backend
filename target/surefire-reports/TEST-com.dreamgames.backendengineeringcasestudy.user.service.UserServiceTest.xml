@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.dreamgames.backendengineeringcasestudy.BackendEngineeringCaseStudyApplicationTests" time="3.19" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.dreamgames.backendengineeringcasestudy.user.service.UserServiceTest" time="0.149" tests="10" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="19"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -62,160 +62,14 @@
     <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
     <property name="java.class.version" value="63.0"/>
   </properties>
-  <testcase name="contextLoads" classname="com.dreamgames.backendengineeringcasestudy.BackendEngineeringCaseStudyApplicationTests" time="0.302">
-    <system-out><![CDATA[03:31:48.661 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.dreamgames.backendengineeringcasestudy.BackendEngineeringCaseStudyApplicationTests]: BackendEngineeringCaseStudyApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-03:31:48.709 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.dreamgames.backendengineeringcasestudy.BackendEngineeringCaseStudyApplication for test class com.dreamgames.backendengineeringcasestudy.BackendEngineeringCaseStudyApplicationTests
-03:31:48.776 [main] INFO org.springframework.boot.devtools.restart.RestartApplicationListener -- Restart disabled due to context in which it is running
-
-  .   ____          _            __ _ _
- /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
-( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
- \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-  '  |____| .__|_| |_|_| |_\__, | / / / /
- =========|_|==============|___/=/_/_/_/
- :: Spring Boot ::                (v3.2.1)
-
-2024-05-19T03:31:48.879+03:00  INFO 13554 --- [           main] kendEngineeringCaseStudyApplicationTests : Starting BackendEngineeringCaseStudyApplicationTests using Java 19.0.1 with PID 13554 (started by ceydog in /Users/ceydog/Desktop/github_repos/dream-backend-case-study)
-2024-05-19T03:31:48.880+03:00  INFO 13554 --- [           main] kendEngineeringCaseStudyApplicationTests : No active profile set, falling back to 1 default profile: "default"
-2024-05-19T03:31:49.276+03:00  INFO 13554 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-05-19T03:31:49.318+03:00  INFO 13554 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 37 ms. Found 5 JPA repository interfaces.
-2024-05-19T03:31:49.585+03:00  INFO 13554 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-05-19T03:31:49.617+03:00  INFO 13554 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
-2024-05-19T03:31:49.631+03:00  INFO 13554 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2024-05-19T03:31:49.750+03:00  INFO 13554 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-05-19T03:31:49.764+03:00  INFO 13554 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2024-05-19T03:31:49.929+03:00  INFO 13554 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@33f349ae
-2024-05-19T03:31:49.930+03:00  INFO 13554 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2024-05-19T03:31:50.580+03:00  INFO 13554 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-Hibernate: alter table game_match drop foreign key FKjp4fnt2pmuu75komijvjnhc5x
-Hibernate: alter table game_match drop foreign key FK1yjkbx4q4c8nobidymu402ubd
-Hibernate: alter table game_match drop foreign key FKgb147njgcnbjxhcyl72pn7kss
-Hibernate: alter table tournament_session drop foreign key FKm31ms29gdy7a606snjt30ysw
-Hibernate: alter table tournament_session drop foreign key FK16usr9trd8j7dglihvj4qeqmq
-Hibernate: drop table if exists game_match
-Hibernate: drop table if exists match_group
-Hibernate: drop table if exists tournament
-Hibernate: drop table if exists tournament_session
-Hibernate: drop table if exists user
-Hibernate: create table game_match (created_at datetime(6), group_id bigint, match_id bigint not null auto_increment, tournament_id bigint, user_id bigint, primary key (match_id)) engine=InnoDB
-Hibernate: create table match_group (match_group_id bigint not null auto_increment, version bigint, primary key (match_group_id)) engine=InnoDB
-Hibernate: create table tournament (is_active BOOLEAN DEFAULT TRUE not null, id bigint not null auto_increment, tournament_end_time datetime(6) not null, tournament_start_time datetime(6) not null, primary key (id)) engine=InnoDB
-Hibernate: create table tournament_session (did_claim_reward BOOLEAN DEFAULT FALSE not null, joined_at datetime(6), reward INT DEFAULT 0 not null, tournament_id bigint not null, tournament_session_id bigint not null auto_increment, user_id bigint not null, version bigint, primary key (tournament_session_id)) engine=InnoDB
-Hibernate: create table user (user_level integer not null, user_coins bigint not null, user_id bigint not null auto_increment, version bigint, user_country enum ('TURKEY','UNITED_STATES','UNITED_KINGDOM','FRANCE','GERMANY') not null, primary key (user_id)) engine=InnoDB
-Hibernate: alter table tournament_session add constraint UK_p7slreqfhab4b1rt5xyd2op8y unique (user_id)
-Hibernate: alter table game_match add constraint FKjp4fnt2pmuu75komijvjnhc5x foreign key (group_id) references match_group (match_group_id)
-Hibernate: alter table game_match add constraint FK1yjkbx4q4c8nobidymu402ubd foreign key (tournament_id) references tournament (id)
-Hibernate: alter table game_match add constraint FKgb147njgcnbjxhcyl72pn7kss foreign key (user_id) references user (user_id)
-Hibernate: alter table tournament_session add constraint FKm31ms29gdy7a606snjt30ysw foreign key (tournament_id) references tournament (id)
-Hibernate: alter table tournament_session add constraint FK16usr9trd8j7dglihvj4qeqmq foreign key (user_id) references user (user_id)
-2024-05-19T03:31:50.799+03:00  INFO 13554 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-05-19T03:31:51.031+03:00  INFO 13554 --- [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2024-05-19T03:31:51.158+03:00  WARN 13554 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2024-05-19T03:31:51.409+03:00  INFO 13554 --- [           main] o.a.k.clients.consumer.ConsumerConfig    : ConsumerConfig values: 
-	allow.auto.create.topics = true
-	auto.commit.interval.ms = 5000
-	auto.include.jmx.reporter = true
-	auto.offset.reset = earliest
-	bootstrap.servers = [localhost:9092]
-	check.crcs = true
-	client.dns.lookup = use_all_dns_ips
-	client.id = consumer-app-1-1
-	client.rack = 
-	connections.max.idle.ms = 540000
-	default.api.timeout.ms = 60000
-	enable.auto.commit = false
-	exclude.internal.topics = true
-	fetch.max.bytes = 52428800
-	fetch.max.wait.ms = 500
-	fetch.min.bytes = 1
-	group.id = app-1
-	group.instance.id = null
-	heartbeat.interval.ms = 3000
-	interceptor.classes = []
-	internal.leave.group.on.close = true
-	internal.throw.on.fetch.stable.offset.unsupported = false
-	isolation.level = read_uncommitted
-	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
-	max.partition.fetch.bytes = 1048576
-	max.poll.interval.ms = 300000
-	max.poll.records = 500
-	metadata.max.age.ms = 300000
-	metric.reporters = []
-	metrics.num.samples = 2
-	metrics.recording.level = INFO
-	metrics.sample.window.ms = 30000
-	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
-	receive.buffer.bytes = 65536
-	reconnect.backoff.max.ms = 1000
-	reconnect.backoff.ms = 50
-	request.timeout.ms = 30000
-	retry.backoff.ms = 100
-	sasl.client.callback.handler.class = null
-	sasl.jaas.config = null
-	sasl.kerberos.kinit.cmd = /usr/bin/kinit
-	sasl.kerberos.min.time.before.relogin = 60000
-	sasl.kerberos.service.name = null
-	sasl.kerberos.ticket.renew.jitter = 0.05
-	sasl.kerberos.ticket.renew.window.factor = 0.8
-	sasl.login.callback.handler.class = null
-	sasl.login.class = null
-	sasl.login.connect.timeout.ms = null
-	sasl.login.read.timeout.ms = null
-	sasl.login.refresh.buffer.seconds = 300
-	sasl.login.refresh.min.period.seconds = 60
-	sasl.login.refresh.window.factor = 0.8
-	sasl.login.refresh.window.jitter = 0.05
-	sasl.login.retry.backoff.max.ms = 10000
-	sasl.login.retry.backoff.ms = 100
-	sasl.mechanism = GSSAPI
-	sasl.oauthbearer.clock.skew.seconds = 30
-	sasl.oauthbearer.expected.audience = null
-	sasl.oauthbearer.expected.issuer = null
-	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
-	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
-	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
-	sasl.oauthbearer.jwks.endpoint.url = null
-	sasl.oauthbearer.scope.claim.name = scope
-	sasl.oauthbearer.sub.claim.name = sub
-	sasl.oauthbearer.token.endpoint.url = null
-	security.protocol = PLAINTEXT
-	security.providers = null
-	send.buffer.bytes = 131072
-	session.timeout.ms = 45000
-	socket.connection.setup.timeout.max.ms = 30000
-	socket.connection.setup.timeout.ms = 10000
-	ssl.cipher.suites = null
-	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
-	ssl.endpoint.identification.algorithm = https
-	ssl.engine.factory.class = null
-	ssl.key.password = null
-	ssl.keymanager.algorithm = SunX509
-	ssl.keystore.certificate.chain = null
-	ssl.keystore.key = null
-	ssl.keystore.location = null
-	ssl.keystore.password = null
-	ssl.keystore.type = JKS
-	ssl.protocol = TLSv1.3
-	ssl.provider = null
-	ssl.secure.random.implementation = null
-	ssl.trustmanager.algorithm = PKIX
-	ssl.truststore.certificates = null
-	ssl.truststore.location = null
-	ssl.truststore.password = null
-	ssl.truststore.type = JKS
-	value.deserializer = class org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
-
-2024-05-19T03:31:51.478+03:00  INFO 13554 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 3.6.1
-2024-05-19T03:31:51.478+03:00  INFO 13554 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: 5e3c2b738d253ff5
-2024-05-19T03:31:51.478+03:00  INFO 13554 --- [           main] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1716078711477
-2024-05-19T03:31:51.479+03:00  INFO 13554 --- [           main] fkaConsumerFactory$ExtendedKafkaConsumer : [Consumer clientId=consumer-app-1-1, groupId=app-1] Subscribed to topic(s): enter-tournament
-2024-05-19T03:31:51.490+03:00  INFO 13554 --- [           main] kendEngineeringCaseStudyApplicationTests : Started BackendEngineeringCaseStudyApplicationTests in 2.72 seconds (process running for 3.169)
-2024-05-19T03:31:51.605+03:00  INFO 13554 --- [ntainer#0-0-C-1] org.apache.kafka.clients.Metadata        : [Consumer clientId=consumer-app-1-1, groupId=app-1] Cluster ID: eO2hgLDoTGumwVoCzDko3A
-2024-05-19T03:31:51.605+03:00  INFO 13554 --- [ntainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-app-1-1, groupId=app-1] Discovered group coordinator ceydas-mbp-2:9092 (id: 2147483647 rack: null)
-2024-05-19T03:31:51.620+03:00  INFO 13554 --- [ntainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-app-1-1, groupId=app-1] (Re-)joining group
-2024-05-19T03:31:51.633+03:00  INFO 13554 --- [ntainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-app-1-1, groupId=app-1] Request joining group due to: need to re-join with the given member-id: consumer-app-1-1-442d09d0-c971-42dc-a9b3-2b47972e8334
-2024-05-19T03:31:51.633+03:00  INFO 13554 --- [ntainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-app-1-1, groupId=app-1] Request joining group due to: rebalance failed due to 'The group member needs to have a valid member id before actually entering a consumer group.' (MemberIdRequiredException)
-2024-05-19T03:31:51.633+03:00  INFO 13554 --- [ntainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-app-1-1, groupId=app-1] (Re-)joining group
-]]></system-out>
-  </testcase>
+  <testcase name="findUserById_ExistingId_ShouldReturnUser" classname="com.dreamgames.backendengineeringcasestudy.user.service.UserServiceTest" time="0.119"/>
+  <testcase name="deleteUser_ShouldDeleteUser" classname="com.dreamgames.backendengineeringcasestudy.user.service.UserServiceTest" time="0.003"/>
+  <testcase name="payCoins_InsufficientCoins_ShouldTrowUserException" classname="com.dreamgames.backendengineeringcasestudy.user.service.UserServiceTest" time="0.002"/>
+  <testcase name="createAndSaveUser_ShouldSaveUser" classname="com.dreamgames.backendengineeringcasestudy.user.service.UserServiceTest" time="0.002"/>
+  <testcase name="payCoins_SufficientCoins_ShouldDecreaseCoins" classname="com.dreamgames.backendengineeringcasestudy.user.service.UserServiceTest" time="0.003"/>
+  <testcase name="addCoins_ValidUser_ShouldAddCoins" classname="com.dreamgames.backendengineeringcasestudy.user.service.UserServiceTest" time="0.002"/>
+  <testcase name="completeLevel_ShouldAddCoinsAndLevel" classname="com.dreamgames.backendengineeringcasestudy.user.service.UserServiceTest" time="0.004"/>
+  <testcase name="updateUserLevel_ShouldUpdateLevel" classname="com.dreamgames.backendengineeringcasestudy.user.service.UserServiceTest" time="0.003"/>
+  <testcase name="getUserDetails_ValidUser_ShouldGetUserDetails" classname="com.dreamgames.backendengineeringcasestudy.user.service.UserServiceTest" time="0.002"/>
+  <testcase name="findAllUsers_ShouldReturnUserDtoList" classname="com.dreamgames.backendengineeringcasestudy.user.service.UserServiceTest" time="0.002"/>
 </testsuite>
