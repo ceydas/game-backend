@@ -46,7 +46,7 @@ public class LeaderboardService {
         Long score = EnumTournamentSession.REWARD_LEVEL_ADVANCE.getReward();
 
         // Update Group Leaderboard
-        redisTemplate.opsForZSet().add(GROUP_LEADERBOARD_KEY, groupId + ":" + userId + ":" + country, score);
+        redisTemplate.opsForZSet().incrementScore(GROUP_LEADERBOARD_KEY,  groupId + ":" + userId + ":" + country, score);
 
         redisTemplate.opsForZSet().incrementScore(COUNTRY_LEADERBOARD_KEY, country + ":" + userId, score);
     }

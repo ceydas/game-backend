@@ -34,6 +34,8 @@ public class UserServiceTest {
 
     @Mock
     private UserEntityService userEntityService;
+    @Mock
+    private  LeaderboardService leaderboardService;
 
 
     @InjectMocks
