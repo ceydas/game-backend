@@ -46,9 +46,7 @@ public enum EnumCountry {
             }
         }
         throw new IllegalArgumentException("No country found with name: " + countryCode);
-    @JsonCreator
-    public static EnumCountry fromString(String key) {
-        return key == null ? null : EnumCountry.valueOf(key.toUpperCase());
     }
+
 }
 
