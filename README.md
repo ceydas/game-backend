@@ -47,6 +47,9 @@ The kafka partition design is as follows, by increasing the amount of applicatio
 ![image](https://github.com/ceydas/dream-backend-case-study/assets/26047050/640ac417-2843-4f09-9dc6-01718aea683e)
 
 ## API Endpoints
+#### Overview: Includes all requests excluding claim reward.
+<img width="726" alt="image" src="https://github.com/ceydas/dream-backend-case-study/assets/26047050/c101463a-abc3-4ef0-ac4b-5ea55448e0d9">
+
 #### Create User : This request creates a new user, returning a unique user ID, level,coins, and country.
 POST http://localhost:8080/user-progress/users/register
 <img width="1447" alt="image" src="https://github.com/ceydas/dream-backend-case-study/assets/26047050/52c28d7c-120a-4008-a040-1f134c9937f5">
