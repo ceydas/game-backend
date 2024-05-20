@@ -1,6 +1,7 @@
 package com.dreamgames.backendengineeringcasestudy.leaderboard.controller;
 
 import com.dreamgames.backendengineeringcasestudy.leaderboard.service.LeaderboardService;
+import com.dreamgames.backendengineeringcasestudy.user.enums.EnumCountry;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +15,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class LeaderboardController {
 
-    LeaderboardService leaderboardService;
+    private final LeaderboardService leaderboardService;
 
     /**
      * GetGroupRankRequest: This request retrieves the player's rank for any tournament.
@@ -29,13 +30,17 @@ public class LeaderboardController {
      */
     @GetMapping("/leaderboard/country/{country}")
     public Set<ZSetOperations.TypedTuple<String>> getCountryLeaderboard(@PathVariable String country) {
-        return leaderboardService.getCountryLeaderboard();
+        return leaderboardService.getCountryLeaderboard(country);
     }
 
     @GetMapping("/leaderboard/group/{groupId}")
     public Set<ZSetOperations.TypedTuple<String>> getGroupLeaderboard(@PathVariable Long groupId) {
-        return leaderboardService.getGroupLeaderboard();
+        return leaderboardService.getGroupLeaderboard(groupId);
     }
 
+    @GetMapping("/leaderboard/user/{id}/rank")
+    public Long getRank(@PathVariable Long id){
+        return leaderboardService.getGroupRank(id);
+    }
 
 }

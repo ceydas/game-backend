@@ -14,6 +14,7 @@ import com.dreamgames.backendengineeringcasestudy.tournament.exception.Tournamen
 import com.dreamgames.backendengineeringcasestudy.tournament.service.TournamentService;
 import com.dreamgames.backendengineeringcasestudy.tournament_session.service.TournamentSessionService;
 import com.dreamgames.backendengineeringcasestudy.user.dto.UserDto;
+import com.dreamgames.backendengineeringcasestudy.user.dto.UserLevelCoinDto;
 import com.dreamgames.backendengineeringcasestudy.user.service.UserService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +35,7 @@ public class MatchmakerController {
     @Transactional(rollbackOn = Exception.class)
     public ResponseEntity<UserDto> enterTournament(@PathVariable Long id){
         UserDto userDto = userService.getUserDetails(id);
+        Long currentCoins = userDto.getCurrentCoins();
         validateEnterTournament(userDto);
 
         Long currentTournamentId = tournamentService.findCurrentTournamentId();
@@ -43,6 +45,8 @@ public class MatchmakerController {
                 currentTournamentId
         );
         enterTournamentProducerService.send(enterTournamentProducerDto);
+        Long newCoins = currentCoins - EnumMatchCoins.MIN_REQUIRED_COINS_TO_JOIN_TOURNAMENT.coins;
+        userDto.setCurrentCoins(newCoins);
         return ResponseEntity.ok(userDto);
     }
 

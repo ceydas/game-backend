@@ -15,6 +15,7 @@ import com.dreamgames.backendengineeringcasestudy.tournament_session.exception.T
 import com.dreamgames.backendengineeringcasestudy.user.entity.User;
 import com.dreamgames.backendengineeringcasestudy.user.enums.EnumCountry;
 import com.dreamgames.backendengineeringcasestudy.user.enums.EnumReward;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -29,8 +30,8 @@ public class LeaderboardService {
     private final RedisTemplate<String, String> redisTemplate;
     private final TournamentEntityService tournamentEntityService;
     private final MatchmakerEntityService matchmakerEntityService;
-    private static final String GROUP_LEADERBOARD_KEY = "leaderboard:group";
-    private static final String COUNTRY_LEADERBOARD_KEY = "leaderboard:country";
+    private static final String GROUP_LEADERBOARD_KEY = "leaderboard:group:";
+    private static final String COUNTRY_LEADERBOARD_KEY = "leaderboard:country:";
 
 
     public void updateUserScore(User user) {
@@ -50,13 +51,13 @@ public class LeaderboardService {
         Long score = EnumTournamentSession.REWARD_LEVEL_ADVANCE.getReward();
 
         // Update Group Leaderboard
-        redisTemplate.opsForZSet().incrementScore(GROUP_LEADERBOARD_KEY,  groupId + ":" + userId + ":" + country, score);
+        redisTemplate.opsForZSet().incrementScore(GROUP_LEADERBOARD_KEY + groupId + ":",    "user " + userId + ":country " + country, score);
 
-        redisTemplate.opsForZSet().incrementScore(COUNTRY_LEADERBOARD_KEY, country + ":" + userId, score);
+        redisTemplate.opsForZSet().incrementScore(COUNTRY_LEADERBOARD_KEY + country + ":",   "user " + userId + ":group " + groupId, score);
     }
 
-    public Set<ZSetOperations.TypedTuple<String>> getGroupLeaderboard() {
-        return redisTemplate.opsForZSet().reverseRangeWithScores(GROUP_LEADERBOARD_KEY, 0, -1);
+    public Set<ZSetOperations.TypedTuple<String>> getGroupLeaderboard(Long groupId) {
+        return redisTemplate.opsForZSet().reverseRangeWithScores(GROUP_LEADERBOARD_KEY + groupId + ":", 0, -1);
     }
 
     public Long getGroupRank(Long userId){
@@ -77,10 +78,10 @@ public class LeaderboardService {
         String country = match.getUser().getCountry().toString();
 
         // Construct the member identifier used in the sorted set
-        String member = groupId + ":" + userId + ":" + country;
+        String member = "user " + userId + ":country " + country;
 
         // Fetch the rank (0-based index)
-        Long rank = redisTemplate.opsForZSet().reverseRank(GROUP_LEADERBOARD_KEY, member);
+        Long rank = redisTemplate.opsForZSet().reverseRank(GROUP_LEADERBOARD_KEY + groupId + ":", member);
 
         // Convert to 1-based rank
         return (rank != null) ? rank + 1 : null;
@@ -90,8 +91,8 @@ public class LeaderboardService {
         redisTemplate.delete(GROUP_LEADERBOARD_KEY);
         redisTemplate.delete(COUNTRY_LEADERBOARD_KEY);
     }
-    public Set<ZSetOperations.TypedTuple<String>> getCountryLeaderboard() {
-        return redisTemplate.opsForZSet().reverseRangeWithScores(COUNTRY_LEADERBOARD_KEY, 0, -1);
+    public Set<ZSetOperations.TypedTuple<String>> getCountryLeaderboard(String country) {
+        return redisTemplate.opsForZSet().reverseRangeWithScores(COUNTRY_LEADERBOARD_KEY + country +":", 0, -1);
     }
 
 }

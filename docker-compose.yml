@@ -1,8 +1,6 @@
-version: '3.9'
-
 services:
   app:
-    image: backend-engineering-case-study:1.0
+    image: backend-engineering-case-study:2.0
     container_name: backend-engineering-case-study
     build:
       context: .
@@ -11,6 +9,10 @@ services:
       - '8080:8080'
     networks:
       - 'local-network'
+    depends_on:
+      - mysqldb
+      - kafka
+      - redis
 
   mysqldb:
     image: mysql:8.0.28-oracle
@@ -18,9 +20,9 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: 'mysql-db'
-      MYSQL_USER: 'ceydog'
-      MYSQL_PASSWORD: 'ceydog_pw'
-      MYSQL_ROOT_PASSWORD: 'ceydog_pw'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
     networks:
       - 'local-network'
     ports:
@@ -28,6 +30,47 @@ services:
     volumes:
       - case-mysql-data:/var/lib/case-mysqldb
       - ./mysql-db-dump.sql:/docker-entrypoint-initdb.d/mysql-db-dump.sql:ro
+    healthcheck:
+      test: [ "CMD-SHELL", "mysqladmin ping -h localhost" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  kafka:
+    image: bitnami/kafka:latest
+    container_name: case-kafka
+    ports:
+      - '9092:9092'
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    depends_on:
+      - zookeeper
+    networks:
+      - 'local-network'
+
+  zookeeper:
+    image: zookeeper:latest
+    container_name: case-zookeeper
+    ports:
+      - '2181:2181'
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - 'local-network'
+
+  redis:
+    image: redis:latest
+    container_name: case-redis
+    ports:
+      - '6379:6379'
+    networks:
+      - 'local-network'
 
 volumes:
   case-mysql-data:
