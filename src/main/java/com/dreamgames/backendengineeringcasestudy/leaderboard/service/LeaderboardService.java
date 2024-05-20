@@ -6,8 +6,12 @@ import com.dreamgames.backendengineeringcasestudy.matchmaking.enums.EnumMatchCoi
 import com.dreamgames.backendengineeringcasestudy.matchmaking.enums.EnumMatchLevel;
 import com.dreamgames.backendengineeringcasestudy.matchmaking.service.entityservice.MatchmakerEntityService;
 import com.dreamgames.backendengineeringcasestudy.tournament.entity.Tournament;
+import com.dreamgames.backendengineeringcasestudy.tournament.exception.TournamentErrorMessage;
+import com.dreamgames.backendengineeringcasestudy.tournament.exception.TournamentException;
 import com.dreamgames.backendengineeringcasestudy.tournament.service.entityservice.TournamentEntityService;
 import com.dreamgames.backendengineeringcasestudy.tournament_session.enums.EnumTournamentSession;
+import com.dreamgames.backendengineeringcasestudy.tournament_session.exception.TournamentSessionErrorMessage;
+import com.dreamgames.backendengineeringcasestudy.tournament_session.exception.TournamentSessionException;
 import com.dreamgames.backendengineeringcasestudy.user.entity.User;
 import com.dreamgames.backendengineeringcasestudy.user.enums.EnumCountry;
 import com.dreamgames.backendengineeringcasestudy.user.enums.EnumReward;
@@ -27,7 +31,7 @@ public class LeaderboardService {
     private final MatchmakerEntityService matchmakerEntityService;
     private static final String GROUP_LEADERBOARD_KEY = "leaderboard:group";
     private static final String COUNTRY_LEADERBOARD_KEY = "leaderboard:country";
-    private static final String USER_SCORES_KEY_PREFIX = "leaderboard:user";
+
 
     public void updateUserScore(User user) {
         Long userId = user.getUserId();
@@ -55,6 +59,37 @@ public class LeaderboardService {
         return redisTemplate.opsForZSet().reverseRangeWithScores(GROUP_LEADERBOARD_KEY, 0, -1);
     }
 
+    public Long getGroupRank(Long userId){
+        Tournament tournament = tournamentEntityService.findActive();
+        // No active tournament
+        if (tournament == null) {
+            throw new TournamentException(TournamentErrorMessage.NO_ACTIVE_TOURNAMENT);
+        }
+
+        // Fetch the user's match group
+        Match match = matchmakerEntityService.findByUserIdWithControl(userId);
+        // User not in any match
+        if (match == null) {
+            throw new TournamentSessionException(TournamentSessionErrorMessage.USER_HAS_NO_TOURNAMENT_PARTICIPATION);
+        }
+
+        Long groupId = match.getMatchGroup().getGroupId();
+        String country = match.getUser().getCountry().toString();
+
+        // Construct the member identifier used in the sorted set
+        String member = groupId + ":" + userId + ":" + country;
+
+        // Fetch the rank (0-based index)
+        Long rank = redisTemplate.opsForZSet().reverseRank(GROUP_LEADERBOARD_KEY, member);
+
+        // Convert to 1-based rank
+        return (rank != null) ? rank + 1 : null;
+    }
+
+    public void resetLeaderboard(){
+        redisTemplate.delete(GROUP_LEADERBOARD_KEY);
+        redisTemplate.delete(COUNTRY_LEADERBOARD_KEY);
+    }
     public Set<ZSetOperations.TypedTuple<String>> getCountryLeaderboard() {
         return redisTemplate.opsForZSet().reverseRangeWithScores(COUNTRY_LEADERBOARD_KEY, 0, -1);
     }

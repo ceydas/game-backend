@@ -32,5 +32,10 @@ public class LeaderboardController {
         return leaderboardService.getCountryLeaderboard();
     }
 
+    @GetMapping("/leaderboard/group/{groupId}")
+    public Set<ZSetOperations.TypedTuple<String>> getGroupLeaderboard(@PathVariable Long groupId) {
+        return leaderboardService.getGroupLeaderboard();
+    }
+
 
 }

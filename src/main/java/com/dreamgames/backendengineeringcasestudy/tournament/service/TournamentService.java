@@ -1,4 +1,5 @@
 package com.dreamgames.backendengineeringcasestudy.tournament.service;
+import com.dreamgames.backendengineeringcasestudy.leaderboard.service.LeaderboardService;
 import com.dreamgames.backendengineeringcasestudy.tournament.converter.TournamentConverter;
 import com.dreamgames.backendengineeringcasestudy.tournament.dto.TournamentDto;
 import com.dreamgames.backendengineeringcasestudy.tournament.entity.Tournament;
@@ -16,16 +17,17 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TournamentService {
     private final TournamentEntityService tournamentEntityService;
+    LeaderboardService leaderboardService;
     @Scheduled(cron = "0 0 0 * * *", zone = "UTC") // At 00:00 UTC
     public void startTournament(){
         Tournament tournament = tournamentEntityService.startTournament(LocalDateTime.now());
-        //todo log tournament start,end
     }
     @Scheduled(cron = "0 0 20 * * *", zone = "UTC") // At 20:00 UTC
     public void endTournament(){
         TournamentDto tournamentDto = this.findActive();
         Long activeTournamentId = tournamentDto.getId();
         tournamentEntityService.endTournament(activeTournamentId);
+        leaderboardService.resetLeaderboard();
     }
 
     public TournamentDto findActive(){
