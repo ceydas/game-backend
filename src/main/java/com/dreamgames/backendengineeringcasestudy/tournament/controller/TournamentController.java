@@ -1,6 +1,8 @@
 package com.dreamgames.backendengineeringcasestudy.tournament.controller;
 
 import com.dreamgames.backendengineeringcasestudy.tournament.dto.TournamentDto;
+import com.dreamgames.backendengineeringcasestudy.tournament.exception.TournamentErrorMessage;
+import com.dreamgames.backendengineeringcasestudy.tournament.exception.TournamentException;
 import com.dreamgames.backendengineeringcasestudy.tournament.service.TournamentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +17,7 @@ public class TournamentController {
     public ResponseEntity<TournamentDto> getActive(){
         TournamentDto tournamentDto = tournamentService.findActive();
         if (tournamentDto == null){
-            return ResponseEntity.noContent().build();
+            throw new TournamentException(TournamentErrorMessage.NO_ACTIVE_TOURNAMENT);
         }
         return ResponseEntity.ok(tournamentDto);
     }

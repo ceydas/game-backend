@@ -37,7 +37,6 @@ public class MatchmakerService {
     private final UserService userService;
     private final int capacity = EnumMatchCapacity.TOURNAMENT_GROUP_CAPACITY.getCapacity();
 
-    // todo change capacity to 5
     private Map<EnumCountry, ArrayList<EnterTournamentProducerDto>> countryUserMap = new HashMap<EnumCountry, ArrayList<EnterTournamentProducerDto>>(capacity);
     private final ReentrantLock lock = new ReentrantLock();
 
@@ -70,7 +69,6 @@ public class MatchmakerService {
     @Transactional(rollbackOn = Exception.class)
     public void enterTournamentUsersFromDifferentCountries(Map<EnumCountry, ArrayList<EnterTournamentProducerDto>> userList) {
 
-        // Implement your logic to process the users
         System.out.println("Processing users: " + userList);
 
         HashMap<EnumCountry, EnterTournamentProducerDto> dtosToRemove = new HashMap<>();
